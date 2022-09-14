@@ -1,11 +1,14 @@
 import MainListView from 'views/MainListView';
 import RootTemplate from 'components/templates/RootTemplate';
+import { ContactsDataProvider } from 'providers/useContactsData';
 
 function Root() {
   return (
-    <RootTemplate>
-      <MainListView />
-    </RootTemplate>
+    <ContactsDataProvider>
+      <RootTemplate>
+        <MainListView />
+      </RootTemplate>
+    </ContactsDataProvider>
   );
 }
 

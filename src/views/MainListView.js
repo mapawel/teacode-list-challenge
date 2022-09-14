@@ -1,62 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import useSWR from 'swr';
-import { fetchContacts } from 'fetchers';
+import React, { useEffect } from 'react';
 import Heading from 'components/organisms/Heading';
 import ListTemplate from 'components/templates/ListTemplate';
 import CardItem from 'components/molecules/CardItem';
+import useContactsData from 'providers/useContactsData';
+import Typography from '@material-ui/core/Typography';
+import FetchStatus from 'components/molecules/FetchStatus';
+import useFilters from 'hooks/useFilters';
 
 const MainListView = () => {
-  const [contacts, setContacts] = useState([]);
-  const [filtered, setFiltered] = useState(contacts);
-  const [checkedIds, setCheckedIds] = useState([]);
-  const { data } = useSWR('/', fetchContacts);
-
-  const toggleCheckId = useCallback(
-    (id) => {
-      if (checkedIds.includes(id))
-        return setCheckedIds(checkedIds.filter((el) => el !== id));
-
-      setCheckedIds([...checkedIds, id]);
-    },
-    [checkedIds]
-  );
-
-  const searchContact = (e) => {
-    const searched = e.target.value;
-    const regexp = new RegExp(searched, 'ig');
-
-    setFiltered(
-      contacts.filter(
-        ({ last_name, first_name }) =>
-          last_name.match(regexp) || first_name.match(regexp)
-      )
-    );
-  };
+  const { contacts, isLoading, error } = useContactsData();
+  const { checkedIds, searchContact, toggleCheckId, filtered, setContacts } =
+    useFilters();
 
   useEffect(() => {
-    if (data?.ok)
-      setContacts(
-        data.data.sort((a, b) => a.last_name.localeCompare(b.last_name))
-      );
-  }, [data]);
-
-  useEffect(() => {
-    setFiltered(contacts);
-  }, [contacts]);
-
-  useEffect(() => {
-    console.log(
-      checkedIds.length
-        ? `IDs of checked contacts: ${checkedIds}`
-        : 'No checked contacts.'
-    );
-  }, [checkedIds]);
+    setContacts(contacts);
+  }, [contacts, setContacts]);
 
   return (
     <>
       <Heading searchContact={searchContact} />
+      {(error || isLoading) && (
+        <FetchStatus error={error} isLoading={isLoading} />
+      )}
       <ListTemplate>
-        {filtered?.length &&
+        {filtered?.length && !error ? (
           filtered?.map(({ id, first_name, last_name, avatar }) => (
             <CardItem
               key={id}
@@ -67,7 +34,16 @@ const MainListView = () => {
               toggleCheckId={toggleCheckId}
               checkedIds={checkedIds}
             ></CardItem>
-          ))}
+          ))
+        ) : (
+          <>
+            {!isLoading && !error ? (
+              <li>
+                <Typography variant="body2">preparing...</Typography>
+              </li>
+            ) : null}
+          </>
+        )}
       </ListTemplate>
     </>
   );
