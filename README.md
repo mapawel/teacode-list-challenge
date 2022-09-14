@@ -18,6 +18,7 @@ https://stellular-squirrel-ab3a94.netlify.app
 - SWR used for more efficient data storing and rapid revalidation when opereting in the browser window
 - useTransition new React 18 API used to keep the best input reaction for user changes
 - used Regexp for the easiest contact search by name or last name (just a word fragment, lower/upper case not-sensitive )
+- loading state and ERRORS (as a result of data fetch!) handled, user informed for better UX
 - rapid design by MUI with custom colors and styles, Styled Components for Globals and as a backdoor for fast custom design changes
 - app effeciency available (MUI to remove in these case, Lazy Images possible for avatars)
 - for more efficiency server changes suggested to fetch 100-200 records each time - then invinite scroll with useSWR possible!
@@ -27,6 +28,7 @@ https://stellular-squirrel-ab3a94.netlify.app
 - efficiency (MUI to remove)
 - PROP TYPES to add!
 - design (input color and some rest elements)
+
 #### Time spent: aprox 4h + documentation
 
 
