@@ -1,0 +1,34 @@
+{
+  "workbench.colorTheme": "Community Material Theme Ocean High Contrast",
+  "workbench.iconTheme": "eq-material-theme-icons",
+  "files.autoSave": "afterDelay",
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "diffEditor.wordWrap": "on",
+  "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+  },
+  "editor.hover.delay": 2000,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+      "javascript"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.singleQuote": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#6A3322",
+    "titleBar.activeBackground": "#65472F",
+    "titleBar.activeForeground": "#F8FCF9"
+  }
+}
