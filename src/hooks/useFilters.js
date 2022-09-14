@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, startTransition } from 'react';
 
 const useFilters = () => {
   const [contacts, setContacts] = useState();
@@ -19,12 +19,14 @@ const useFilters = () => {
     const searched = e.target.value;
     const regexp = new RegExp(searched, 'ig');
 
-    setFiltered(
-      contacts.filter(
-        ({ last_name, first_name }) =>
-          last_name.match(regexp) || first_name.match(regexp)
-      )
-    );
+    startTransition(() => {
+      setFiltered(
+        contacts.filter(
+          ({ last_name, first_name }) =>
+            last_name.match(regexp) || first_name.match(regexp)
+        )
+      );
+    });
   };
 
   useEffect(() => {

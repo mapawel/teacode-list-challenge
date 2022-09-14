@@ -39,7 +39,7 @@ const MainListView = () => {
           <>
             {!isLoading && !error ? (
               <li>
-                <Typography variant="body2">preparing...</Typography>
+                <Typography variant="body2">nothing here ...</Typography>
               </li>
             ) : null}
           </>
