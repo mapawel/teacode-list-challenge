@@ -4,14 +4,14 @@ import mainTheme from 'themes/mainTheme';
 const MUItheme2 = createTheme({
   palette: {
     primary: {
-      main: mainTheme.color.primary,
+      main: mainTheme.color.base,
     },
     secondary: {
       main: mainTheme.color.secondary,
     },
     text: {
       primary: mainTheme.color.primary,
-      light: mainTheme.color.grey,
+      light: mainTheme.color.base,
     },
     background: {
       default: mainTheme.color.base,

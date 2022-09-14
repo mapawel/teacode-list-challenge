@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import PageBlockWrapper from 'components/templates/PageBlockWrapper';
 import useSWR from 'swr';
 import { fetchContacts } from 'fetchers';
 import Box from '@material-ui/core/Box';
@@ -14,8 +13,31 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
+  pageWrapper: {
+    width: '96%',
+    maxWidth: '1800px',
+    margin: '0 auto',
+  },
+  banerWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '96%',
+    maxWidth: '1800px',
+    margin: '0 auto',
+  },
+  baner: {
+    backgroundColor: theme.palette.secondary.main,
+    padding: '3rem 0',
+  },
+  heading: {
+    color: theme.palette.text.light,
+    marginRight: '2rem',
+  },
   list: {
     maxWidth: '600px',
   },
@@ -31,12 +53,19 @@ const useStyles = makeStyles((theme) => ({
     '&>p:first-of-type': {
       marginRight: '0.5rem',
     },
-    
+
     '&:hover': {
       boxShadow: `3px 5px 12px -6px ${theme.palette.secondary.light}`,
     },
   },
-  form: {},
+  form: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  input: {
+    width: '30rem',
+  },
   checkbox: {
     marginLeft: 'auto',
   },
@@ -46,6 +75,12 @@ const useStyles = makeStyles((theme) => ({
   nameBox: {
     display: 'flex',
     gap: '0.5rem',
+  },
+  icon: {
+    color: theme.palette.text.light,
+    height: '4rem',
+    width: '4rem',
+    marginRight: '1rem',
   },
 }));
 
@@ -98,50 +133,59 @@ const MainListView = () => {
   }, [checkedIds]);
 
   return (
-    <PageBlockWrapper>
-      <form
-        className={classes.form}
-        noValidate
-        autoComplete="off"
-        onChange={(e) => searchContact(e)}
-      >
-        <TextField
-          id="search"
-          name="search"
-          label="find contact..."
-          variant="outlined"
-          color="secondary"
-        />
-      </form>
-      <List className={classes.list}>
-        {filtered?.length &&
-          filtered?.map(({ id, first_name, last_name, email, avatar }) => (
-            <ListItem className={classes.listItem} key={id}>
-              <Card className={classes.card} onClick={() => toggleCheckId(id)}>
-                <ListItemAvatar>
-                  <Avatar
-                    className={classes.avatar}
-                    alt={`Avatar of ${first_name}`}
-                    src={avatar}
-                  />
-                </ListItemAvatar>
-                <Typography variant="body1" color="primary">
-                  {first_name}
-                </Typography>
-                <Typography variant="body1" color="primary">
-                  {last_name}
-                </Typography>
-                {/* <Typography color="primary">{email}</Typography> */}
+    <>
+      <Box className={classes.baner}>
+        <Box className={classes.banerWrapper}>
+          <Typography variant="h1" className={classes.heading}>
+            Contacts
+          </Typography>
+          <form
+            className={classes.form}
+            noValidate
+            autoComplete="off"
+            onChange={(e) => searchContact(e)}
+          >
+            <SearchIcon className={classes.icon} />
+            <TextField
+              id="search"
+              name="search"
+              label="find contact..."
+              variant="outlined"
+              color="primary"
+              className={classes.input}
+            />
+          </form>
+        </Box>
+      </Box>
+      <Box className={classes.pageWrapper}>
+        <List className={classes.list}>
+          {filtered?.length &&
+            filtered?.map(({ id, first_name, last_name, email, avatar }) => (
+              <ListItem className={classes.listItem} key={id}>
+                <Card
+                  className={classes.card}
+                  onClick={() => toggleCheckId(id)}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      className={classes.avatar}
+                      alt={`Avatar of ${first_name}`}
+                      src={avatar}
+                    />
+                  </ListItemAvatar>
+                  <Typography variant="body1">{first_name}</Typography>
+                  <Typography variant="body1">{last_name}</Typography>
 
-                <Checkbox
-                  className={classes.checkbox}
-                  checked={checkedIds.indexOf(id) !== -1}
-                />
-              </Card>
-            </ListItem>
-          ))}
-      </List>
-    </PageBlockWrapper>
+                  <Checkbox
+                    className={classes.checkbox}
+                    checked={checkedIds.indexOf(id) !== -1}
+                  />
+                </Card>
+              </ListItem>
+            ))}
+        </List>
+      </Box>
+    </>
   );
 };
 
