@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import PageBlockWrapper from 'components/templates/PageBlockWrapper';
 import useSWR from 'swr';
 import { fetchContacts } from 'fetchers';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,15 +21,31 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {},
   card: {
+    boxShadow: `3px 5px 18px -3px ${theme.palette.grey[200]}`,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     width: '100%',
-    padding: '2rem 3rem',
+    padding: '0.5rem 1rem',
     cursor: 'pointer',
-  },
-  form: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
+    '&>p:first-of-type': {
+      marginRight: '0.5rem',
     },
+    
+    '&:hover': {
+      boxShadow: `3px 5px 12px -6px ${theme.palette.secondary.light}`,
+    },
+  },
+  form: {},
+  checkbox: {
+    marginLeft: 'auto',
+  },
+  avatar: {
+    border: `1px solid ${theme.palette.grey[400]}`,
+  },
+  nameBox: {
+    display: 'flex',
+    gap: '0.5rem',
   },
 }));
 
@@ -98,26 +115,31 @@ const MainListView = () => {
       </form>
       <List className={classes.list}>
         {filtered?.length &&
-          filtered?.map(
-            ({ id, first_name, last_name, email, gender, avatar }) => (
-              <ListItem className={classes.listItem} key={id}>
-                <Card
-                  className={classes.card}
-                  onClick={() => toggleCheckId(id)}
-                >
-                  <ListItemAvatar>
-                    <Avatar alt={`Avatar of ${first_name}`} src={avatar} />
-                  </ListItemAvatar>
-                  <Typography color="primary">{first_name}</Typography>
-                  <Typography color="primary">{last_name}</Typography>
-                  <Checkbox
-                    edge="end"
-                    checked={checkedIds.indexOf(id) !== -1}
+          filtered?.map(({ id, first_name, last_name, email, avatar }) => (
+            <ListItem className={classes.listItem} key={id}>
+              <Card className={classes.card} onClick={() => toggleCheckId(id)}>
+                <ListItemAvatar>
+                  <Avatar
+                    className={classes.avatar}
+                    alt={`Avatar of ${first_name}`}
+                    src={avatar}
                   />
-                </Card>
-              </ListItem>
-            )
-          )}
+                </ListItemAvatar>
+                <Typography variant="body1" color="primary">
+                  {first_name}
+                </Typography>
+                <Typography variant="body1" color="primary">
+                  {last_name}
+                </Typography>
+                {/* <Typography color="primary">{email}</Typography> */}
+
+                <Checkbox
+                  className={classes.checkbox}
+                  checked={checkedIds.indexOf(id) !== -1}
+                />
+              </Card>
+            </ListItem>
+          ))}
       </List>
     </PageBlockWrapper>
   );
