@@ -2,8 +2,10 @@
 ## 14.09.2022 - "Contacts List"
 
 
-# SOLUTION LIVE:
+## CHECK SOLUTION LIVE:
 https://stellular-squirrel-ab3a94.netlify.app
+
+
 ### Techstack used:
 
 - React 18
@@ -16,6 +18,7 @@ https://stellular-squirrel-ab3a94.netlify.app
 - atomic design used for components transparency
 - logic seperated with design - custom hooks and providers
 - SWR used for more efficient data storing and rapid revalidation when opereting in the browser window
+- simple RWD (not the best design but works on mobile and desktop)
 - useTransition new React 18 API used to keep the best input reaction for user changes
 - used Regexp for the easiest contact search by name or last name (just a word fragment, lower/upper case not-sensitive )
 - loading state and ERRORS (as a result of data fetch!) handled, user informed for better UX
@@ -24,10 +27,8 @@ https://stellular-squirrel-ab3a94.netlify.app
 - for more efficiency server changes suggested to fetch 100-200 records each time - then invinite scroll with useSWR possible!
 
 ### To develop:
-- input VALIDATION!
 - efficiency (MUI to remove)
 - PROP TYPES to add!
-- design (input color and some rest elements)
 
 #### Time spent: aprox 4h + documentation
 
@@ -57,4 +58,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### CHANGES LOG:
+- 15.09.2022 - added simple input validation 
 
