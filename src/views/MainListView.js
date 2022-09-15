@@ -9,8 +9,14 @@ import useFilters from 'hooks/useFilters';
 
 const MainListView = () => {
   const { contacts, isLoading, error } = useContactsData();
-  const { checkedIds, searchContact, toggleCheckId, filtered, setContacts, inputError } =
-    useFilters();
+  const {
+    checkedIds,
+    searchContact,
+    toggleCheckId,
+    filtered,
+    setContacts,
+    inputError,
+  } = useFilters();
 
   useEffect(() => {
     setContacts(contacts);
@@ -22,29 +28,31 @@ const MainListView = () => {
       {(error || isLoading) && (
         <FetchStatus error={error} isLoading={isLoading} />
       )}
-      <ListTemplate>
-        {filtered?.length && !error ? (
-          filtered?.map(({ id, first_name, last_name, avatar }) => (
-            <CardItem
-              key={id}
-              avatar={avatar}
-              last_name={last_name}
-              first_name={first_name}
-              id={id}
-              toggleCheckId={toggleCheckId}
-              checkedIds={checkedIds}
-            ></CardItem>
-          ))
-        ) : (
-          <>
-            {!isLoading && !error ? (
-              <li>
-                <Typography variant="body2">nothing here ...</Typography>
-              </li>
-            ) : null}
-          </>
-        )}
-      </ListTemplate>
+      <main>
+        <ListTemplate>
+          {filtered?.length && !error ? (
+            filtered?.map(({ id, first_name, last_name, avatar }) => (
+              <CardItem
+                key={id}
+                avatar={avatar}
+                last_name={last_name}
+                first_name={first_name}
+                id={id}
+                toggleCheckId={toggleCheckId}
+                checkedIds={checkedIds}
+              ></CardItem>
+            ))
+          ) : (
+            <>
+              {!isLoading && !error ? (
+                <li>
+                  <Typography variant="body2">nothing here ...</Typography>
+                </li>
+              ) : null}
+            </>
+          )}
+        </ListTemplate>
+      </main>
     </>
   );
 };

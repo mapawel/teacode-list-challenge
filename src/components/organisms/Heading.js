@@ -56,7 +56,7 @@ const Heading = ({ searchContact, inputError }) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.baner}>
+    <Box component="header" className={classes.baner}>
       <Box className={classes.banerWrapper}>
         <Typography variant="h1" className={classes.heading}>
           Contacts

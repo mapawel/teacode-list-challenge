@@ -18,7 +18,7 @@ const ListTemplate = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.pageWrapper}>
+    <Box component="section" className={classes.pageWrapper}>
       <List className={classes.list}>{children}</List>
     </Box>
   );

@@ -60,4 +60,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### CHANGES LOG:
 - 15.09.2022 - added simple input validation 
+- 15.09.2022 - html tags - better semantic useage 
 
