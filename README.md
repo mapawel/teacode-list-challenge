@@ -39,6 +39,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## To run project locally
 
 
+### `npm i`
+
+To install all modules.
+
 ### `npm start`
 
 Runs the app in the development mode.\
