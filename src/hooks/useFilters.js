@@ -4,6 +4,7 @@ const useFilters = () => {
   const [contacts, setContacts] = useState();
   const [filtered, setFiltered] = useState(contacts);
   const [checkedIds, setCheckedIds] = useState([]);
+  const [inputError, setInputError] = useState('');
 
   const toggleCheckId = useCallback(
     (id) => {
@@ -16,7 +17,11 @@ const useFilters = () => {
   );
 
   const searchContact = (e) => {
+    setInputError('');
+    const lettersRegexp = /^[A-Za-z]+$/;
     const searched = e.target.value;
+    if (!searched.match(lettersRegexp) && searched !== '')
+      return setInputError('only letters allowed');
     const regexp = new RegExp(searched, 'ig');
 
     startTransition(() => {
@@ -48,6 +53,7 @@ const useFilters = () => {
     filtered,
     setFiltered,
     setContacts,
+    inputError,
   };
 };
 

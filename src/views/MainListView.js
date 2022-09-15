@@ -9,7 +9,7 @@ import useFilters from 'hooks/useFilters';
 
 const MainListView = () => {
   const { contacts, isLoading, error } = useContactsData();
-  const { checkedIds, searchContact, toggleCheckId, filtered, setContacts } =
+  const { checkedIds, searchContact, toggleCheckId, filtered, setContacts, inputError } =
     useFilters();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const MainListView = () => {
 
   return (
     <>
-      <Heading searchContact={searchContact} />
+      <Heading searchContact={searchContact} inputError={inputError} />
       {(error || isLoading) && (
         <FetchStatus error={error} isLoading={isLoading} />
       )}

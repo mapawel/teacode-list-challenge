@@ -27,7 +27,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '&>div>p.MuiFormHelperText-root.Mui-error': {
+      position: 'absolute',
+      bottom: '-2.5rem',
+    },
+    '&>div>div>fieldset.MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.primary.main,
+    },
+    '&>div:hover': {
+      '&>div>fieldset.MuiOutlinedInput-notchedOutline': {
+        borderColor: theme.palette.secondary.dark,
+      },
+    },
   },
+
   input: {
     width: '30rem',
   },
@@ -39,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Heading = ({ searchContact }) => {
+const Heading = ({ searchContact, inputError }) => {
   const classes = useStyles();
 
   return (
@@ -53,6 +66,9 @@ const Heading = ({ searchContact }) => {
           noValidate
           autoComplete="off"
           onChange={(e) => searchContact(e)}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
         >
           <SearchIcon className={classes.icon} />
           <TextField
@@ -62,6 +78,8 @@ const Heading = ({ searchContact }) => {
             variant="outlined"
             color="primary"
             className={classes.input}
+            error={inputError}
+            helperText={inputError}
           />
         </form>
       </Box>
